@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { login, logout } from "../actions/userActions";
+import { logout } from "../actions/userActions";
 import ShoppingCart from "./ShoppingCart";
 
 class NavBar extends Component {
@@ -12,7 +12,7 @@ class NavBar extends Component {
 			<header>
 				<NavLink to='/'>Shoply</NavLink>
 				<span>
-					{!user && (
+					{!user ? (
 						<span>
 							<NavLink className='login' to='/login'>
 								Login
@@ -21,8 +21,7 @@ class NavBar extends Component {
 								Register
 							</NavLink>
 						</span>
-					)}
-					{user && (
+					) : (
 						<span>
 							{user.isAdmin && (
 								<NavLink className='admin' to='/admin'>
@@ -32,7 +31,7 @@ class NavBar extends Component {
 							<NavLink className='user-orders' to='/user'>
 								Orders
 							</NavLink>
-							<NavLink className='logout' to='/' onClick={() => logout()}>
+							<NavLink className='logout' to='/' onClick={logout}>
 								Logout
 							</NavLink>
 						</span>
@@ -49,7 +48,6 @@ export default connect(
 		user: state.user.user
 	}),
 	{
-		login,
 		logout
 	}
 )(NavBar);

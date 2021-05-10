@@ -1,6 +1,11 @@
 import { LOGIN, LOGOUT, REGISTER } from "../types";
 
-export const userReducer = (state = { user: JSON.parse(localStorage.getItem("user") || null) }, action) => {
+export const userReducer = (
+	state = {
+		user: JSON.parse(localStorage.getItem("user") || null)
+	},
+	action
+) => {
 	switch (action.type) {
 		case LOGIN:
 			return {

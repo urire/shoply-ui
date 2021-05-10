@@ -31,9 +31,7 @@ class Products extends Component {
 		return (
 			<div>
 				<Fade bottom cascade>
-					{!products ? (
-						<div>Loading...</div>
-					) : (
+					{products && (
 						<ul className='products'>
 							{products.map(product => (
 								<li key={product._id}>

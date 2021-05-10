@@ -18,4 +18,12 @@ class ShoppingCart extends Component {
 	}
 }
 
-export default connect(state => ({ cart: state.cart.cart, shown: state.cart.shown }), { showCart })(ShoppingCart);
+export default connect(
+	state => ({
+		cart: state.cart.cart,
+		shown: state.cart.shown
+	}),
+	{
+		showCart
+	}
+)(ShoppingCart);
