@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Filter from "../components/Filter";
 import Products from "../components/Products";
 import Cart from "../components/Cart";
-import { render } from "@testing-library/react";
 
 class HomeScreen extends Component {
 	render() {
