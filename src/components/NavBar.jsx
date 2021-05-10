@@ -6,7 +6,7 @@ import ShoppingCart from "./ShoppingCart";
 
 class NavBar extends Component {
 	render() {
-		const { user, handleShown, logout } = this.props;
+		const { user, logout } = this.props;
 
 		return (
 			<header>
@@ -37,7 +37,7 @@ class NavBar extends Component {
 							</NavLink>
 						</span>
 					)}
-					<ShoppingCart showCart={() => handleShown()} />
+					<ShoppingCart />
 				</span>
 			</header>
 		);

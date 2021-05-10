@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../types";
+import { ADD_TO_CART, REMOVE_FROM_CART, SHOW_CART } from "../types";
 
 export const addToCart = (items, product) => dispatch => {
 	const cart = items.slice();
@@ -33,4 +33,11 @@ export const removeFromCart = (items, product) => dispatch => {
 	});
 
 	localStorage.setItem("cart", JSON.stringify(cart));
+};
+
+export const showCart = shown => dispatch => {
+	dispatch({
+		type: SHOW_CART,
+		payload: { shown: !shown }
+	});
 };
