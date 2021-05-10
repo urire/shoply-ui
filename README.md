@@ -1,4 +1,4 @@
-# shoply-ui
+# Shoply
 
 url: https://shoply-ui.netlify.app
 
