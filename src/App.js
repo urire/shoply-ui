@@ -7,49 +7,39 @@ import AdminScreen from "./screens/AdminScreen";
 import UserScreen from "./screens/UserScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
-import store from "./store";
-
 import http from "./services/httpService";
+import store from "./store";
 
 function App() {
 	const history = useHistory();
 	const [shown, setShown] = useState(false);
 	const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") || null));
 
+	const initUser = ({ data }) => {
+		const { token, user } = data;
+		const loggedUser = { token, ...user };
+
+		setUser(loggedUser);
+		history.push("/");
+		localStorage.setItem("user", JSON.stringify(loggedUser));
+	};
+
 	const login = (email, password) => {
 		http
 			.post("/users/login", { email, password })
-			.then(res => {
-				const { data } = res;
-
-				const loggedUser = { token: data.token, ...data.user };
-				console.log({ token: data.token, ...data.user });
-
-				setUser(loggedUser);
-
-				history.push("/");
-				localStorage.setItem("user", JSON.stringify(loggedUser));
-			})
+			.then(res => initUser(res))
 			.catch(err => alert("invalid email or password"));
 	};
 
 	const register = async (name, email, password) => {
 		http
 			.post("/users/register", { name, email, password })
-			.then(res => {
-				const { data } = res;
-				const registeredUser = { token: data.token, ...data.user };
-
-				setUser(registeredUser);
-				history.push("/");
-				localStorage.setItem("user", JSON.stringify(registeredUser));
-			})
+			.then(res => initUser(res))
 			.catch(err => alert("invalid name, email or password"));
 	};
 
 	const logout = () => {
 		setUser(null);
-
 		localStorage.setItem("user", null);
 	};
 
