@@ -119,6 +119,11 @@ footer {
 
 .product a {
 	text-decoration: none;
+	color: grey;
+}
+
+.product a:hover {
+	color: #ff8000;
 }
 
 .product a p {
@@ -138,7 +143,8 @@ footer {
 
 .product-price div,
 .product-price button {
-	text-align: center;
+	text-align: right;
+	margin-right: 1.2rem;
 	flex: 1;
 }
 
@@ -165,6 +171,17 @@ footer {
 
 .btn-primary {
 	background-color: #f0c040;
+}
+
+.btn-label {
+	background-color: transparent;
+	border: 0;
+	color: blue;
+}
+
+.btn-label:hover {
+	border: 0;
+	color: rgba(0, 0, 255, 0.7);
 }
 
 /* Filters */

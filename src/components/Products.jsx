@@ -42,19 +42,13 @@ class Products extends Component {
 							{products.map(product => (
 								<li key={product._id}>
 									<div className='product'>
-										<NavLink
-											to={"#" + product._id}
-											onClick={() => this.openModal(product)}
-										>
+										<NavLink to={"#" + product._id} onClick={() => this.openModal(product)}>
 											<img src={product.image} alt={product.title}></img>
 											<p>{product.title}</p>
 										</NavLink>
 										<div className='product-price'>
 											<div>${product.price}</div>
-											<button
-												className='btn btn-primary'
-												onClick={() => addToCart(cart, product)}
-											>
+											<button className='btn btn-label' onClick={() => addToCart(cart, product)}>
 												Add To Cart
 											</button>
 										</div>
@@ -86,7 +80,7 @@ class Products extends Component {
 									<div className='product-price'>
 										<div>${product.price}</div>
 										<button
-											className='btn btn-primary'
+											className='btn btn-label'
 											onClick={() => {
 												addToCart(cart, product);
 												this.closeModal();
@@ -105,10 +99,7 @@ class Products extends Component {
 	}
 }
 
-export default connect(
-	state => ({ products: state.products.filteredItems, cart: state.cart.cart }),
-	{
-		fetchProducts,
-		addToCart
-	}
-)(Products);
+export default connect(state => ({ products: state.products.filteredItems, cart: state.cart.cart }), {
+	fetchProducts,
+	addToCart
+})(Products);

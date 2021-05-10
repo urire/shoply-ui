@@ -50,9 +50,7 @@ class Cart extends Component {
 					{cart.length === 0 ? (
 						<div className='cart cart-header'>Cart is Empty</div>
 					) : (
-						<div className='cart cart-header'>
-							You have {cart.length} items in the cart{" "}
-						</div>
+						<div className='cart cart-header'>You have {cart.length} items in the cart </div>
 					)}
 					{order && (
 						<Modal isOpen={true} onRequestClose={this.closeModal}>
@@ -64,9 +62,7 @@ class Cart extends Component {
 									})}
 								/>
 								<div className='order-details'>
-									<h3 className='success-message'>
-										Your order has been placed.
-									</h3>
+									<h3 className='success-message'>Your order has been placed.</h3>
 									<h2>Order {order._id}</h2>
 									<ul>
 										<li>
@@ -129,11 +125,10 @@ class Cart extends Component {
 											<div className='center'>
 												<div>{item.title}</div>
 												<div>
-													${item.price} x {item.count}{" "}
-													<button
-														className='btn'
-														onClick={() => removeFromCart(cart, item)}
-													>
+													<strong>
+														${item.price} x {item.count}{" "}
+													</strong>
+													<button className='btn btn-label' onClick={() => removeFromCart(cart, item)}>
 														Remove
 													</button>
 												</div>
@@ -147,9 +142,7 @@ class Cart extends Component {
 							<div>
 								<div className='cart'>
 									<div className='total'>
-										<div>
-											Total: ${cart.reduce((a, c) => a + c.price * c.count, 0)}
-										</div>
+										<div>Total: ${cart.reduce((a, c) => a + c.price * c.count, 0)}</div>
 										<button
 											className='btn btn-primary'
 											onClick={() => {
@@ -167,30 +160,15 @@ class Cart extends Component {
 												<ul className='form-container'>
 													<li>
 														<label>Email</label>
-														<input
-															name='email'
-															type='email'
-															required
-															onChange={this.handleInput}
-														></input>
+														<input name='email' type='email' required onChange={this.handleInput}></input>
 													</li>
 													<li>
 														<label>Name</label>
-														<input
-															name='name'
-															type='text'
-															required
-															onChange={this.handleInput}
-														></input>
+														<input name='name' type='text' required onChange={this.handleInput}></input>
 													</li>
 													<li>
 														<label>Address</label>
-														<input
-															name='address'
-															type='text'
-															required
-															onChange={this.handleInput}
-														></input>
+														<input name='address' type='text' required onChange={this.handleInput}></input>
 													</li>
 													<li>
 														<button className='btn btn-primary' type='submit'>
