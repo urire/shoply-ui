@@ -9,8 +9,11 @@ class UserOrders extends Component {
 
 	render() {
 		const { userOrders } = this.props;
+
 		return !userOrders ? (
-			<div>Orders</div>
+			<div>Loading...</div>
+		) : userOrders.length === 0 ? (
+			<div>No Orders</div>
 		) : (
 			<div className='orders'>
 				<h2>Orders</h2>

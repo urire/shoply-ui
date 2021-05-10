@@ -1,8 +1,15 @@
 import { Component } from "react";
+import { connect } from "react-redux";
 import Orders from "../components/Orders";
 
-export default class AdminScreen extends Component {
+class AdminScreen extends Component {
 	render() {
-		return <div>{this.props.user && <Orders user={this.props.user} />}</div>;
+		const { user } = this.props;
+
+		return <div>{user && <Orders user={user} />}</div>;
 	}
 }
+
+export default connect(state => ({
+	user: state.user.user
+}))(AdminScreen);

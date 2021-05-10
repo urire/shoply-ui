@@ -8,3 +8,6 @@ export const CLEAR_ORDER = "CLEAR_ORDER";
 export const CLEAR_CART = "CLEAR_CART";
 export const FETCH_ORDERS = "FETCH_ORDERS";
 export const FETCH_USER_ORDERS = "FETCH_USER_ORDERS";
+export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
+export const REGISTER = "REGISTER";

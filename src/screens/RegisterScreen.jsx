@@ -1,37 +1,39 @@
 import { Component } from "react";
+import { connect } from "react-redux";
+import { register } from "../actions/userActions";
 
-export default class RegisterScreen extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			name: "",
-			email: "",
-			password: ""
-		};
-	}
+class RegisterScreen extends Component {
+	state = {
+		name: "",
+		email: "",
+		password: ""
+	};
 
 	handleInput = event => {
 		this.setState({ [event.target.name]: event.target.value });
 	};
 
 	register = () => {
-		if (this.state.name === "") {
+		const { name, email, password } = this.state;
+		const { register, history } = this.props;
+
+		if (name === "") {
 			alert("name is required");
 			return;
 		}
 
-		if (this.state.email === "") {
+		if (email === "") {
 			alert("email is required");
 			return;
 		}
 
-		if (this.state.password === "") {
+		if (password === "") {
 			alert("password is required");
 			return;
 		}
 
-		this.props.register(this.state.name, this.state.email, this.state.password);
+		register(name, email, password);
+		history.push("/");
 	};
 
 	render() {
@@ -60,3 +62,12 @@ export default class RegisterScreen extends Component {
 		);
 	}
 }
+
+export default connect(
+	state => ({
+		user: state.user.user
+	}),
+	{
+		register
+	}
+)(RegisterScreen);

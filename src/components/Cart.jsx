@@ -7,16 +7,12 @@ import { removeFromCart } from "../actions/cartActions";
 import { createOrder, clearOrder } from "../actions/orderActions";
 
 class Cart extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			name: "",
-			email: "",
-			address: "",
-			showCheckout: false
-		};
-	}
+	state = {
+		name: "",
+		email: "",
+		address: "",
+		showCheckout: false
+	};
 
 	handleInput = event => {
 		this.setState({ [event.target.name]: event.target.value });
@@ -43,6 +39,7 @@ class Cart extends Component {
 
 	render() {
 		const { order, cart, removeFromCart } = this.props;
+		const { showCheckout } = this.state;
 
 		return (
 			<Fade right cascade>
@@ -153,7 +150,7 @@ class Cart extends Component {
 										</button>
 									</div>
 								</div>
-								{this.state.showCheckout && (
+								{showCheckout && (
 									<Fade right>
 										<div className='cart'>
 											<form onSubmit={this.createOrder}>

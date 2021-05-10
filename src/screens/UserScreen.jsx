@@ -1,8 +1,15 @@
 import { Component } from "react";
+import { connect } from "react-redux";
 import UserOrders from "../components/UserOrders";
 
-export default class UserScreen extends Component {
+class UserScreen extends Component {
 	render() {
-		return <div>{this.props.user && <UserOrders user={this.props.user} />}</div>;
+		const { user } = this.props;
+
+		return <div>{user && <UserOrders user={user} />}</div>;
 	}
 }
+
+export default connect(state => ({
+	user: state.user.user
+}))(UserScreen);

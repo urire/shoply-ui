@@ -5,15 +5,11 @@ import { connect } from "react-redux";
 
 class ShoppingCart extends Component {
 	render() {
+		const { showCart, cart } = this.props;
+
 		return (
-			<IconButton
-				className='cart-btn'
-				onClick={this.props.showCart}
-				edge='start'
-				color='inherit'
-				aria-label='menu'
-			>
-				<Badge badgeContent={this.props.cart.length} color='secondary'>
+			<IconButton className='cart-btn' onClick={showCart} edge='start' color='inherit' aria-label='menu'>
+				<Badge badgeContent={cart.length} color='secondary'>
 					<ShoppingCartSharp style={{ fontSize: "24px" }} />
 				</Badge>
 			</IconButton>

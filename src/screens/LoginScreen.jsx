@@ -1,31 +1,33 @@
 import { Component } from "react";
+import { connect } from "react-redux";
+import { login } from "../actions/userActions";
 
-export default class LoginScreen extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			email: "",
-			password: ""
-		};
-	}
+class LoginScreen extends Component {
+	state = {
+		email: "",
+		password: ""
+	};
 
 	handleInput = event => {
 		this.setState({ [event.target.name]: event.target.value });
 	};
 
 	login = () => {
-		if (this.state.email === "") {
+		const { email, password } = this.state;
+		const { login, history } = this.props;
+
+		if (email === "") {
 			alert("email is required");
 			return;
 		}
 
-		if (this.state.password === "") {
+		if (password === "") {
 			alert("password is required");
 			return;
 		}
 
-		this.props.login(this.state.email, this.state.password);
+		login(email, password);
+		history.push("/");
 	};
 
 	render() {
@@ -50,3 +52,12 @@ export default class LoginScreen extends Component {
 		);
 	}
 }
+
+export default connect(
+	state => ({
+		user: state.user.user
+	}),
+	{
+		login
+	}
+)(LoginScreen);

@@ -8,13 +8,9 @@ import { fetchProducts } from "../actions/productActions";
 import { addToCart } from "../actions/cartActions";
 
 class Products extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			product: null
-		};
-	}
+	state = {
+		product: null
+	};
 
 	componentDidMount() {
 		this.props.fetchProducts();
@@ -99,7 +95,13 @@ class Products extends Component {
 	}
 }
 
-export default connect(state => ({ products: state.products.filteredItems, cart: state.cart.cart }), {
-	fetchProducts,
-	addToCart
-})(Products);
+export default connect(
+	state => ({
+		products: state.products.filteredItems,
+		cart: state.cart.cart
+	}),
+	{
+		fetchProducts,
+		addToCart
+	}
+)(Products);
