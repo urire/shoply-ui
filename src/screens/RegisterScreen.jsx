@@ -1,63 +1,48 @@
-import { Component } from "react";
 import { connect } from "react-redux";
 import { register } from "../actions/userActions";
+import Joi from "joi-browser";
+import Form from "../components/common/form";
 
-class RegisterScreen extends Component {
+class RegisterScreen extends Form {
 	state = {
-		name: "",
-		email: "",
-		password: ""
+		data: { name: "", email: "", password: "" },
+		errors: {}
 	};
 
-	handleInput = event => {
-		this.setState({ [event.target.name]: event.target.value });
+	schema = {
+		name: Joi.string().required().label("Name"),
+		email: Joi.string().required().label("Email"),
+		password: Joi.string().required().label("Password")
 	};
 
-	register = () => {
-		const { name, email, password } = this.state;
-		const { register, history } = this.props;
+	doSubmit = async () => {
+		const { name, email, password } = this.state.data;
+		const { register } = this.props;
 
-		if (name === "") {
-			alert("name is required");
-			return;
+		try {
+			await register(name, email, password);
+
+			const { state } = this.props.location;
+
+			window.location = state ? state.from.pathname : "/";
+		} catch (ex) {
+			if (ex.response && ex.response.status === 400) {
+				const errors = { ...this.state.errors };
+				errors.email = ex.response.data;
+				this.setState({ errors });
+			}
 		}
-
-		if (email === "") {
-			alert("email is required");
-			return;
-		}
-
-		if (password === "") {
-			alert("password is required");
-			return;
-		}
-
-		register(name, email, password);
-		history.push("/");
 	};
 
 	render() {
 		return (
 			<div className='login-form'>
-				<ul className='form-container'>
-					<li>
-						<label>Name</label>
-						<input name='name' type='text' required onChange={this.handleInput}></input>
-					</li>
-					<li>
-						<label>Email</label>
-						<input name='email' type='email' required onChange={this.handleInput}></input>
-					</li>
-					<li>
-						<label>Password</label>
-						<input name='password' type='text' required onChange={this.handleInput}></input>
-					</li>
-					<li>
-						<button className='btn btn-primary' onClick={this.register}>
-							Register
-						</button>
-					</li>
-				</ul>
+				<form onSubmit={this.handleSubmit}>
+					{this.renderInput("name", "Name")}
+					{this.renderInput("email", "Email")}
+					{this.renderInput("password", "Password", "password")}
+					{this.renderButton("Register")}
+				</form>
 			</div>
 		);
 	}

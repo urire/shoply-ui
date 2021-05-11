@@ -415,3 +415,41 @@ th {
 .user-orders {
 	margin-right: 1.5rem;
 }
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 50vw;
+	margin-bottom: 1rem;
+}
+
+/* Login Form */
+
+.login-form {
+	width: 50vw;
+	margin-left: 25vw;
+	margin-top: 15%;
+}
+
+.login-form .btn {
+	width: 100%;
+	margin-top: 1rem;
+}
+
+.form-group input {
+	width: 100%;
+	text-align: center;
+}
+
+/* Alerts */
+
+.alert {
+	width: 100%;
+	text-align: center;
+}
+
+.alert-danger {
+	background: red;
+	color: white;
+}
