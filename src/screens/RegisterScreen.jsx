@@ -22,9 +22,7 @@ class RegisterScreen extends Form {
 		try {
 			await register(name, email, password);
 
-			const { state } = this.props.location;
-
-			window.location = state ? state.from.pathname : "/";
+			this.props.history.push("/");
 		} catch (ex) {
 			if (ex.response && ex.response.status === 400) {
 				const errors = { ...this.state.errors };
