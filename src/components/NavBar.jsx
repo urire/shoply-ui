@@ -36,7 +36,9 @@ class NavBar extends Component {
 							</NavLink>
 						</span>
 					)}
-					<ShoppingCart />
+					<NavLink to='/'>
+						<ShoppingCart />
+					</NavLink>
 				</span>
 			</header>
 		);
