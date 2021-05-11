@@ -1,4 +1,4 @@
-import { CREATE_ORDER, CLEAR_ORDER, FETCH_ORDERS, FETCH_USER_ORDERS } from "../types";
+import { CREATE_ORDER, CLEAR_ORDER, FETCH_ORDERS, FETCH_USER_ORDERS, DELETE_ORDER } from "../types";
 
 export const orderReducer = (state = {}, action) => {
 	switch (action.type) {
@@ -17,6 +17,10 @@ export const orderReducer = (state = {}, action) => {
 		case FETCH_USER_ORDERS:
 			return {
 				userOrders: action.payload
+			};
+		case DELETE_ORDER:
+			return {
+				orders: action.payload
 			};
 		default:
 			return state;

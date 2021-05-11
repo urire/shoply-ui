@@ -1,5 +1,5 @@
 import http from "../services/httpService";
-import { CLEAR_CART, CLEAR_ORDER, CREATE_ORDER, FETCH_ORDERS, FETCH_USER_ORDERS } from "../types";
+import { CLEAR_CART, CLEAR_ORDER, CREATE_ORDER, FETCH_ORDERS, FETCH_USER_ORDERS, DELETE_ORDER } from "../types";
 
 export const createOrder = order => dispatch => {
 	http.post("/orders", order).then(res => {
@@ -28,5 +28,12 @@ export const fetchUserOrders = token => dispatch => {
 	http.setJwt(token);
 	http.get("/orders/me").then(res => {
 		dispatch({ type: FETCH_USER_ORDERS, payload: res.data });
+	});
+};
+
+export const deleteOrder = (token, id, orders) => dispatch => {
+	http.setJwt(token);
+	http.delete(`/orders/${id}`).then(res => {
+		dispatch({ type: DELETE_ORDER, payload: orders.filter(order => order._id !== res.data._id) });
 	});
 };

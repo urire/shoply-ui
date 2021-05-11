@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchOrders } from "../actions/orderActions";
+import { fetchOrders, deleteOrder } from "../actions/orderActions";
 
 class Orders extends Component {
 	componentDidMount() {
@@ -8,7 +8,7 @@ class Orders extends Component {
 	}
 
 	render() {
-		const { orders } = this.props;
+		const { orders, user, deleteOrder } = this.props;
 
 		return !orders ? (
 			<div>Loading...</div>
@@ -41,6 +41,11 @@ class Orders extends Component {
 										</div>
 									))}
 								</td>
+								<td>
+									<button className='btn btn-label' onClick={() => deleteOrder(user.token, order._id, orders)}>
+										Delete
+									</button>
+								</td>
 							</tr>
 						))}
 					</tbody>
@@ -55,6 +60,7 @@ export default connect(
 		orders: state.order.orders
 	}),
 	{
-		fetchOrders
+		fetchOrders,
+		deleteOrder
 	}
 )(Orders);
